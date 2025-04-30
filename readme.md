@@ -20,3 +20,11 @@ Este projeto é uma API feita com Node.js e Express para realizar operações de
 1. Clone o repositório:
 ```bash
 git clone https://github.com/seuusuario/seurepositorio.git
+
+## 📈 Melhorias futuras
+
+- Adicionar endpoints `POST`, `PUT`, e `DELETE`
+- Implementar validações com middleware
+- Conectar com banco de dados (ex: MongoDB)
+- Criar testes automatizados
+- Documentar com Swagger
