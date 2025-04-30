@@ -14,3 +14,9 @@ Este projeto é uma API feita com Node.js e Express para realizar operações de
 - `GET /` - Mensagem inicial
 - `GET /users` - Listar todos os usuários
 - (em breve mais endpoints)
+
+## 🛠️ Como rodar o projeto
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/seuusuario/seurepositorio.git
