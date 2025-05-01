@@ -8,44 +8,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepository repository;
+    private UsuarioService usuarioService;
 
-    @GetMapping("/")
-    public String home() {
-        return "<h1>API CRUD de Usuários - Java Spring Boot</h1><p>Use /users para interagir com a API</p>";
+    @GetMapping
+    public List<Usuario> listar() {
+        return usuarioService.listarTodos();
     }
 
     @PostMapping
-    public Usuario criarUsuario(@RequestBody Usuario usuario) {
-        return repository.salvar(usuario);
-    }
-
-    @GetMapping
-    public List<Usuario> listarUsuarios() {
-        return repository.listarTodos();
+    public Usuario criar(@RequestBody Usuario usuario) {
+        return usuarioService.salvar(usuario);
     }
 
     @GetMapping("/{id}")
-    public Usuario buscarUsuario(@PathVariable int id) {
-        return repository.buscarPorId(id);
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
+        return usuarioService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public Usuario atualizarUsuario(@PathVariable int id, @RequestBody Usuario usuario) {
-        return repository.atualizar(id, usuario);
+    public Usuario atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+        return usuarioService.atualizar(id, usuario);
     }
 
     @DeleteMapping("/{id}")
-    public String deletarUsuario(@PathVariable int id) {
-        boolean deletado = repository.deletar(id);
-        if (deletado) {
-            return "Usuário deletado com sucesso.";
-        } else {
-            return "Usuário não encontrado.";
-        }
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        usuarioService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }
